@@ -83,7 +83,7 @@ int64_t   bmp180_true_pressure( uint32_t raw_pressure, int16_t raw_temperature, 
 
         
 int       bmp180_get_values(lua_State *L);
-int luaopen_mylib (lua_State *L)
+int       luaopen_bmp180 (lua_State *L);
 /***********************************************************************/
 
 

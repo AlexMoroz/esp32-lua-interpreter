@@ -245,6 +245,7 @@ int64_t bmp180_true_pressure( uint32_t raw_pressure, int16_t raw_temperature, bm
 	return p;
 }
 /***********************************************************************/
+//create bindings
 
 static const char* TAG = "BMP180";
 
@@ -294,13 +295,13 @@ int bmp180_get_values(lua_State *L) {
     return 2;
 }
 
-static const struct luaL_Reg mylib [] = {
-        {"test", bmp180_get_values},
+static const struct luaL_Reg bmp180 [] = {
+        {"get", bmp180_get_values},
         {NULL, NULL}  /* sentinel */
 };
 
-int luaopen_mylib (lua_State *L) {
-        luaL_newlib(L, mylib);
+int luaopen_bmp180 (lua_State *L) {
+        luaL_newlib(L, bmp180);
         return 1;
 }
 

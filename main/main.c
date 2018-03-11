@@ -23,6 +23,7 @@
 #include "lauxlib.h"
 #include "lualib.h"
 #include "sb.h"
+#include "modules.h"
 
 static const char* TAG = "Console";
 
@@ -144,6 +145,7 @@ void app_main()
     //initialize lua state
     lua_State *L = luaL_newstate();
     luaL_openlibs(L);
+    lua_preload_libs(L);
 
     StringBuilder *sb = sb_create();
     int result;
