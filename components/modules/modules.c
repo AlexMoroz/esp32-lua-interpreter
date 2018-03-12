@@ -1,12 +1,20 @@
 #include "lua.h"
 #include "lauxlib.h"
 #include "lualib.h"
-#include "bmp180.h"
+#include "bmp180_lua.h"
+#include "modules.h"
 
+void registerlib(lua_State *L, const char *name, lua_CFunction f) {
+	lua_getglobal(L, "package");
+	lua_getfield(L, -1, "preload"); /* get 'package.preload' */
+	lua_pushcfunction(L, f);
+	lua_setfield(L, -2, name); /* package.preload[name] = f */
+	lua_pop(L, 2); /* pop 'package' and 'preload' tables */
+}
 
-void lua_preload_libs(lua_State *L) {
-    luaL_getsubtable(L, LUA_REGISTRYINDEX, LUA_PRELOAD_TABLE);
-    lua_pushcfunction(L, luaopen_bmp180);
-    lua_setfield(L, -2, bmp180);
-    lua_pop(L, 1);  // remove PRELOAD table
+void openlibs(lua_State *L) {
+	luaL_requiref(L, "_G", luaopen_base, 1);
+	luaL_requiref(L, "package", luaopen_package, 1);
+	lua_pop(L, 2); /* remove results from previous calls */
+	registerlib(L, "bmp180", luaopen_bmp180);
 }

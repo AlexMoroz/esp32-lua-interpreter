@@ -7,6 +7,7 @@
    CONDITIONS OF ANY KIND, either express or implied.
 */
 
+#include <modules.h>
 #include <stdio.h>
 #include <string.h>
 #include "esp_system.h"
@@ -23,7 +24,6 @@
 #include "lauxlib.h"
 #include "lualib.h"
 #include "sb.h"
-#include "modules.h"
 
 static const char* TAG = "Console";
 
@@ -145,7 +145,7 @@ void app_main()
     //initialize lua state
     lua_State *L = luaL_newstate();
     luaL_openlibs(L);
-    lua_preload_libs(L);
+    openlibs(L);
 
     StringBuilder *sb = sb_create();
     int result;

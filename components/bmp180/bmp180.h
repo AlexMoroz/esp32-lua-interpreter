@@ -80,10 +80,6 @@ esp_err_t bmp180_read_raw_pressure( i2c_port_t i2c_num, bmp180_oversampling_t ov
 int32_t   bmp180_true_temperature( uint16_t raw_temperature, bmp180_eeprom_t calibration );
 int64_t   bmp180_true_pressure( uint32_t raw_pressure, int16_t raw_temperature, bmp180_eeprom_t calibration,
         bmp180_oversampling_t oversampling );
-
-        
-int       bmp180_get_values(lua_State *L);
-int       luaopen_bmp180 (lua_State *L);
 /***********************************************************************/
 
 
