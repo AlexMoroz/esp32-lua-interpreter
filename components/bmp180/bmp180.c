@@ -1,3 +1,7 @@
+/*
+ Copyright (c) 2017 Teemu Kärkkäinen
+
+ */
 #ifndef BMP180_
 #define BMP180_
 
