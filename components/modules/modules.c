@@ -1,7 +1,10 @@
 #include "lua.h"
 #include "lauxlib.h"
 #include "lualib.h"
+
 #include "bmp180_lua.h"
+#include "buzzer.h"
+
 #include "modules.h"
 
 void registerlib(lua_State *L, const char *name, lua_CFunction f) {
@@ -17,4 +20,5 @@ void openlibs(lua_State *L) {
 	luaL_requiref(L, "package", luaopen_package, 1);
 	lua_pop(L, 2); /* remove results from previous calls */
 	registerlib(L, "bmp180", luaopen_bmp180);
+	registerlib(L, "buzzer", luaopen_buzzer);
 }

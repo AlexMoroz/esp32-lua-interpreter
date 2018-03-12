@@ -1,0 +1,6 @@
+#ifndef COMPONENTS_RGB_RGB_H_
+#define COMPONENTS_RGB_RGB_H_
+
+
+
+#endif /* COMPONENTS_RGB_RGB_H_ */

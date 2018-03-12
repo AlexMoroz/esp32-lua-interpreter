@@ -1,19 +1,17 @@
-/*
-Copyright (c) 2017 Teemu Kärkkäinen
-
-ESP32 library for interacting with the BMP180 sensor via I2C.
-*/
-
-#include "bmp180_lua.h"
-
 #include "driver/i2c.h"
 #include "esp_log.h"
 #include "esp_err.h"
+#include "lua.h"
+#include "lauxlib.h"
+#include "lualib.h"
 #include "bmp180.h"
+
+#include "bmp180_lua.h"
 
 static const char* TAG = "BMP180";
 
-void init_i2c() {
+int init_i2c(lua_State *L) {
+	ESP_LOGI( TAG, "Initializing I2C" );
     i2c_config_t conf;
     conf.mode = I2C_MODE_MASTER;
     conf.sda_io_num = I2C_DATA_PIN;
@@ -23,12 +21,10 @@ void init_i2c() {
     conf.master.clk_speed = 100000;
     i2c_param_config( I2C_NUM_0, &conf );
     i2c_driver_install( I2C_NUM_0, conf.mode, 0, 0, 0);
+    return 0;
 }
 
 int bmp180_get_values(lua_State *L) {
-	ESP_LOGI( TAG, "Initializing I2C" );
-	init_i2c();
-
     ESP_LOGI( TAG, "Reading BMP180 EEPROM" );
     bmp180_eeprom_t bmp180_eeprom = { 0 };
     ESP_LOGI( TAG, "Initial values: A1=%d, A2=%d, A3=%d, A4=%u, A5=%u, A6=%u, b1=%d, b2=%d, mb=%d, mc=%d, md=%d",
@@ -53,6 +49,7 @@ int bmp180_get_values(lua_State *L) {
         ESP_LOGI( TAG, "Success: raw temperature = %u", raw_temperature );
         int32_t temperature = bmp180_true_temperature( raw_temperature, bmp180_eeprom );
         float tmp = temperature / 10.0;
+        lua_pushnumber(L, tmp);
         ESP_LOGI( TAG, "Calibrated temperature: %d (%f C)", temperature, tmp );
     } else {
         ESP_LOGI( TAG, "Failed to read the raw temperature." );
@@ -66,6 +63,7 @@ int bmp180_get_values(lua_State *L) {
         ESP_LOGI( TAG, "Success: raw pressure = %u", raw_pressure );
         int64_t pressure = bmp180_true_pressure( raw_pressure, raw_temperature, bmp180_eeprom,
             sampling );
+        lua_pushnumber(L, pressure);
         ESP_LOGI( TAG, "Calibrated pressure: %lld", pressure );
     } else {
         ESP_LOGI( TAG, "Failed to read the raw pressure." );

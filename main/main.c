@@ -124,7 +124,8 @@ void app_main()
     const char* prompt = LOG_COLOR_I "lua> " LOG_RESET_COLOR;
 
     printf("\n"
-           "Type Lua code here.\n");
+           "Type Lua code here.\n"
+           "Type '\\' in the end of the line for multiline input.\n");
 
     /* Figure out if the terminal supports escape sequences */
     int probe_status = linenoiseProbe();

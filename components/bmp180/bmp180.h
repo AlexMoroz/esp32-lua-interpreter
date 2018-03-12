@@ -8,9 +8,6 @@ ESP32 library for interacting with the BMP180 sensor via I2C.
 #define BMP180_H_
 
 #include "driver/i2c.h"
-#include "lua.h"
-#include "lauxlib.h"
-#include "lualib.h"
 
 
 
