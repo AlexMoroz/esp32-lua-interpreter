@@ -4,6 +4,7 @@
 
 #include "bmp180_lua.h"
 #include "buzzer.h"
+#include "rgb.h"
 
 #include "modules.h"
 
@@ -21,4 +22,5 @@ void openlibs(lua_State *L) {
 	lua_pop(L, 2); /* remove results from previous calls */
 	registerlib(L, "bmp180", luaopen_bmp180);
 	registerlib(L, "buzzer", luaopen_buzzer);
+	registerlib(L, "rgb", luaopen_rgb);
 }

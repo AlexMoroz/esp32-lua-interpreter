@@ -8,7 +8,6 @@ List of libs
    * bmp180
       - .init() - initialize i2c 
       - .get() - return values; ex. temperature, pressure = bmp180.get()
-
    * buzzer 
       - .play() - play sound in passive buzzer
 	
