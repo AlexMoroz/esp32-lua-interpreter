@@ -10,5 +10,7 @@ List of libs
       - .get() - return values; ex. temperature, pressure = bmp180.get()
    * buzzer 
       - .play() - play sound in passive buzzer
-	
-	
+   * rgb
+      - .set(int,int,int) - saves values and turns on rgb
+      - .on() - turns on rgb with saved values
+      - .off() - turns off the rgb	
