@@ -5,8 +5,9 @@ This project has libraries for SunFounder sensors; this libraries have lua bindi
 
 List of libs
 ------
+   * i2c
+      - .init() - initialize i2c
    * bmp180
-      - .init() - initialize i2c 
       - .get() - return values; ex. temperature, pressure = bmp180.get()
    * buzzer 
       - .play() - play sound in passive buzzer
@@ -14,3 +15,7 @@ List of libs
       - .set(int,int,int) - saves values and turns on rgb
       - .on() - turns on rgb with saved values
       - .off() - turns off the rgb	
+   * lcd
+      - .init() - initialize lcd
+      - .set(int,int) - pointer coordinates
+      - .write(string) - string to print

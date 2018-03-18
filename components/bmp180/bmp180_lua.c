@@ -14,20 +14,6 @@
 
 static const char* TAG = "BMP180";
 
-int init_i2c(lua_State *L) {
-	ESP_LOGI( TAG, "Initializing I2C" );
-    i2c_config_t conf;
-    conf.mode = I2C_MODE_MASTER;
-    conf.sda_io_num = I2C_DATA_PIN;
-    conf.sda_pullup_en = GPIO_PULLUP_ENABLE;
-    conf.scl_io_num = I2C_CLOCK_PIN;
-    conf.scl_pullup_en = GPIO_PULLUP_ENABLE;
-    conf.master.clk_speed = 100000;
-    i2c_param_config( I2C_NUM_0, &conf );
-    i2c_driver_install( I2C_NUM_0, conf.mode, 0, 0, 0);
-    return 0;
-}
-
 int bmp180_get_values(lua_State *L) {
     ESP_LOGI( TAG, "Reading BMP180 EEPROM" );
     bmp180_eeprom_t bmp180_eeprom = { 0 };

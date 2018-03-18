@@ -5,6 +5,8 @@
 #include "bmp180_lua.h"
 #include "buzzer.h"
 #include "rgb.h"
+#include "lcd.h"
+#include "i2c.h"
 
 #include "modules.h"
 
@@ -23,4 +25,6 @@ void openlibs(lua_State *L) {
 	registerlib(L, "bmp180", luaopen_bmp180);
 	registerlib(L, "buzzer", luaopen_buzzer);
 	registerlib(L, "rgb", luaopen_rgb);
+	registerlib(L, "i2c", luaopen_i2c);
+	registerlib(L, "lcd", luaopen_lcd1602);
 }

@@ -22,6 +22,8 @@ uint32_t color_to_duty(uint16_t color) {
 	return DUTY_MAX - color * 16;
 }
 
+static color_t colors;
+
 void setup(int red, int green, int blue, int off) {
 	/* Configure timer for PWM */
 	    ledc_timer_config_t ledc_timer = {
@@ -96,12 +98,10 @@ int set_color(lua_State *L) {
 	if (blue > 255)
 		blue %= 255;
 
-	lua_pushinteger(L, red);
-	lua_rawsetp(L, LUA_REGISTRYINDEX, "static_rgb_red");
-	lua_pushinteger(L, green);
-	lua_rawsetp(L, LUA_REGISTRYINDEX, "static_rgb_green");
-	lua_pushinteger(L, blue);
-	lua_rawsetp(L, LUA_REGISTRYINDEX, "static_rgb_blue");
+	colors.red = red;
+	colors.green = green;
+	colors.blue = blue;
+
 
 	setup(red, green, blue, 0);
 	return 0;
@@ -110,12 +110,9 @@ int set_color(lua_State *L) {
 int turn_on(lua_State *L) {
 	int red, green, blue;
 
-	lua_rawgetp(L, LUA_REGISTRYINDEX, "static_rgb_red");
-	red = lua_tointeger(L, -1);
-	lua_rawgetp(L, LUA_REGISTRYINDEX, "static_rgb_green");
-	green = lua_tointeger(L, -1);
-	lua_rawgetp(L, LUA_REGISTRYINDEX, "static_rgb_blue");
-	blue = lua_tointeger(L, -1);
+	red = colors.red;
+	green = colors.green;
+	blue = colors.blue;
 
 	setup(red, green, blue, 0);
 	return 0;
