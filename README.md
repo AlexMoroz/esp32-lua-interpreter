@@ -19,3 +19,5 @@ List of libs
       - .init() - initialize lcd
       - .set(int,int) - pointer coordinates
       - .write(string) - string to print
+   * gas
+      - .get() - return digital state value, and analog ppm value; ex.  state, value = gas.get()

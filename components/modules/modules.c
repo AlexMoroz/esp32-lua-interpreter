@@ -6,6 +6,7 @@
 #include "buzzer.h"
 #include "rgb.h"
 #include "lcd.h"
+#include "gas.h"
 #include "i2c.h"
 
 #include "modules.h"
@@ -27,4 +28,5 @@ void openlibs(lua_State *L) {
 	registerlib(L, "rgb", luaopen_rgb);
 	registerlib(L, "i2c", luaopen_i2c);
 	registerlib(L, "lcd", luaopen_lcd1602);
+	registerlib(L, "gas", luaopen_gas);
 }
