@@ -21,3 +21,14 @@ List of libs
       - .write(string) - string to print
    * gas
       - .get() - return digital state value, and analog ppm value; ex.  state, value = gas.get()
+      
+Usage example
+---------
+```bash
+lua> i2c = require "i2c"
+lua> lcd = require "lcd"
+lua> i2c.init()
+lua> lcd.init()
+lua> lcd.set(0,0)
+lua> lcd.write("hello world")
+```
