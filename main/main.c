@@ -124,8 +124,7 @@ void app_main()
     const char* prompt = LOG_COLOR_I "lua> " LOG_RESET_COLOR;
 
     printf("\n"
-           "Type Lua code here.\n"
-           "Type '\\' in the end of the line for multiline input.\n");
+           "Type Lua code here.\n");
 
     /* Figure out if the terminal supports escape sequences */
     int probe_status = linenoiseProbe();
@@ -149,7 +148,6 @@ void app_main()
     openlibs(L);
 
     StringBuilder *sb = sb_create();
-    int result;
     /* Main loop */
     while(true) {
         /* Get a line using linenoise.
@@ -167,21 +165,26 @@ void app_main()
 #endif
 
         /* Try to run lua script */
-        if(line[strlen(line)-2] == '\\') {
-            //multiline input
-            sb_append(sb, line, 1);
-            sb_append(sb, " ", 0);
+        sb_append(sb, line, 0);
+        sb_append(sb, " ", 0);
+        char *string_result = sb_concat(sb);
+
+        int result = 0;
+        if(luaL_loadstring(L, string_result)) {
+        	if(strstr(lua_tostring(L, -1), "\'end\' expected near <eof>") != NULL) {
+        		lua_pop(L, 1);
+        	} else {
+        		result = 1;
+        		sb_reset(sb);
+        	}
         } else {
-            if(!sb_empty(sb)) {
-                sb_append(sb, line, 0);
-                char *string_result = sb_concat(sb);
-                printf(string_result);
-                result = luaL_dostring(L, string_result);
-                free(string_result);
-                sb_reset(sb);
-            } else {
-                result = luaL_dostring(L, line);
-            }
+            result = luaL_dostring(L, string_result);
+            free(string_result);
+            sb_reset(sb);
+        }
+        if(result) {
+        	printf("%s\n", lua_tostring(L, -1));
+        	lua_pop(L, 1);
         }
         /* linenoise allocates line buffer on the heap, so need to free it */
         linenoiseFree(line);

@@ -21,6 +21,14 @@ List of libs
       - .write(string) - string to print
    * gas
       - .get() - return digital state value, and analog ppm value; ex.  state, value = gas.get()
+   * eddystone
+      - .init() - initialize bluetooth beacon settings
+      - .start(callback) - start scanning, return found devices in callback funcion as a table
+      - .stop() - stop scanning 
+      
+      
+table for eddystone devices conteins:
+   - type
       
 Usage example
 ---------

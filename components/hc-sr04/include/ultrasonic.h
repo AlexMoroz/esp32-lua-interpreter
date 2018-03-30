@@ -1,0 +1,11 @@
+/*
+ *  Created on: 29 Mar 2018
+ *      Author: Alex Moroz
+ */
+
+#ifndef COMPONENTS_HC_SR04_INCLUDE_ULTRASONIC_H_
+#define COMPONENTS_HC_SR04_INCLUDE_ULTRASONIC_H_
+
+
+
+#endif /* COMPONENTS_HC_SR04_INCLUDE_ULTRASONIC_H_ */
