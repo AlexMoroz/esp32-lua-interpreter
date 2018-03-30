@@ -27,7 +27,7 @@ List of libs
       - .stop() - stop scanning 
       
       
-table for eddystone devices conteins:
+table for eddystone devices contains:
    - type
       
 Usage example
