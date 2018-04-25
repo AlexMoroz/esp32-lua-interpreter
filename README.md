@@ -24,6 +24,7 @@ List of libs
    * eddystone
       - .init() - initialize bluetooth beacon settings
       - .start(callback) - start scanning, return found devices in callback funcion as a table
+      - .share() - start advertising of a new URL eddytone beacon 
       - .stop() - stop scanning 
       
       
