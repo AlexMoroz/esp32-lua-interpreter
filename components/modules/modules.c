@@ -9,6 +9,7 @@
 #include "gas.h"
 #include "i2c.h"
 #include "esp_eddystone.h"
+#include "ultrasonic.h"
 
 #include "modules.h"
 
@@ -31,4 +32,5 @@ void openlibs(lua_State *L) {
 	registerlib(L, "lcd", luaopen_lcd1602);
 	registerlib(L, "gas", luaopen_gas);
 	registerlib(L, "eddystone", luaopen_eddystone);
+	registerlib(L, "ultrasonic", luaopen_ultrasonic);
 }
